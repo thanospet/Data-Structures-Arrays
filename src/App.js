@@ -5,8 +5,20 @@ import "./App.css";
 function App() {
   const [cells, setCells] = useState(["a", "b", "c"]);
 
-  const handleChangeText = (event, idx) => {
-    setCells(event.target.value);
+  const handleChangeText = (newCellValue, indexToUpdate) => {
+    setCells((prevCells) =>
+      prevCells.map((cell, idx) =>
+        idx === indexToUpdate ? newCellValue : cell
+      )
+    );
+  };
+
+  const handlePlusClicked = (idx) => {
+    setCells((prevCells) => [
+      ...prevCells.slice(0, idx + 1),
+      "_",
+      ...prevCells.slice(idx + 1),
+    ]);
   };
 
   return (
@@ -14,12 +26,20 @@ function App() {
       <section className="App-header">
         {cells.map((cell, idx) => {
           return (
-            <div key={idx} className="cells">
-              <input
-                onChange={(event) => handleChangeText(event.target.value, idx)}
-                value={cell}
-              ></input>
-            </div>
+            <>
+              <div key={idx} className="cells ">
+                <input
+                  type="text"
+                  onChange={(e) => handleChangeText(e.currentTarget.value, idx)}
+                  value={cell}
+                ></input>
+                {idx < cells.length - 1 && (
+                  <span onClick={() => handlePlusClicked(idx)} className="span">
+                    +
+                  </span>
+                )}
+              </div>
+            </>
           );
         })}
       </section>
