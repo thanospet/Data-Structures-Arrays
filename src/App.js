@@ -35,7 +35,7 @@ function App() {
                 ></input>
                 {idx < cells.length - 1 && (
                   <span onClick={() => handlePlusClicked(idx)} className="span">
-                    +
+                    {" "}
                   </span>
                 )}
               </div>
