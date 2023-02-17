@@ -21,6 +21,8 @@ function App() {
     ]);
   };
 
+  const combinedString = cells.join("");
+
   return (
     <main className="App">
       <section className="App-header">
@@ -42,6 +44,7 @@ function App() {
             </>
           );
         })}
+        {combinedString}
       </section>
     </main>
   );
